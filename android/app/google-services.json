@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "678738990241",
+    "firebase_url": "https://mlkit-e9a8a.firebaseio.com",
+    "project_id": "mlkit-e9a8a",
+    "storage_bucket": "mlkit-e9a8a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:678738990241:android:2730d3978ec10a315b8ce0",
+        "android_client_info": {
+          "package_name": "com.example.face_detection_flutter"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "678738990241-44mrjivnjulncqb0c3qgan7drl28rqlf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAk5OJ7pMzckPezqJatHVG74xOz7a8vVlA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "678738990241-44mrjivnjulncqb0c3qgan7drl28rqlf.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

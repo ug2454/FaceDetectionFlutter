@@ -20,7 +20,7 @@ class _FaceDetectionState extends State<FaceDetection> {
 
     setState(() {
       rect = List<Rect>();
-    });
+    }); 
 
     // var faceDetectionProperties = FaceDetectorOptions(
     //   enableClassification: true,
@@ -35,6 +35,8 @@ class _FaceDetectionState extends State<FaceDetection> {
     for (Face f in faces) {
       rect.add(f.boundingBox);
       smileProb = f.smilingProbability;
+      
+      print('============================================');
       print(smileProb);
     }
     loadImage(image).then((img) {
@@ -49,20 +51,49 @@ class _FaceDetectionState extends State<FaceDetection> {
     return decodeImageFromList(img);
   }
 
+  String detectSmile() {
+    if (smileProb > 0.86) {
+      return 'Big smile with teeth';
+    }
+    else if (smileProb > 0.8) {
+      return 'Big Smile';
+    } else if (smileProb > 0.3) {
+      return 'Smile';
+    } else
+      return 'Sad';
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         body: SafeArea(
-          child: Container(
-            child: FittedBox(
-              child: SizedBox(
-                width: image != null ? image.width.toDouble() : 500.0,
-                height: image != null ? image.height.toDouble() : 500.0,
-                child: CustomPaint(
-                  painter: Painter(rect: rect, image: image),
+          child: Column(
+            children: [
+              Expanded(
+                child: Center(
+                  child: Container(
+                    child: FittedBox(
+                      child: SizedBox(
+                        width: image != null ? image.width.toDouble() : 500.0,
+                        height: image != null ? image.height.toDouble() : 500.0,
+                        child: CustomPaint(
+                          painter: Painter(rect: rect, image: image),
+                        ),
+                      ),
+                    ),
+                  ),
                 ),
               ),
-            ),
+              Expanded(
+                child: Text(
+                  '${detectSmile()}',
+                  style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 30.0,
+                      fontWeight: FontWeight.bold),
+                ),
+              ),
+            ],
           ),
         ),
         floatingActionButton: FloatingActionButton(

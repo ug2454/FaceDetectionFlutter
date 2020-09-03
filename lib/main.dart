@@ -1,4 +1,5 @@
 import 'package:face_detection_flutter/screens/face_detection.dart';
+import 'package:face_detection_flutter/screens/voice.dart';
 import 'package:flutter/material.dart';
 
 void main() {

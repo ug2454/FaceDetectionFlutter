@@ -13,6 +13,7 @@ class _FaceDetectionState extends State<FaceDetection> {
   ui.Image image;
   var smileProb;
   List<Rect> rect = List<Rect>();
+  List<Rect> eyesRect = List<Rect>();
 
   Future getImage() async {
     var image = await ImagePicker.pickImage(source: ImageSource.camera);
@@ -20,7 +21,7 @@ class _FaceDetectionState extends State<FaceDetection> {
 
     setState(() {
       rect = List<Rect>();
-    }); 
+    });
 
     // var faceDetectionProperties = FaceDetectorOptions(
     //   enableClassification: true,
@@ -29,15 +30,14 @@ class _FaceDetectionState extends State<FaceDetection> {
         FirebaseVision.instance.faceDetector(FaceDetectorOptions(
       enableClassification: true,
       enableLandmarks: true,
+      enableContours: true,
     ));
 
     List<Face> faces = await faceDetection.processImage(visionImage);
     for (Face f in faces) {
       rect.add(f.boundingBox);
+      print(f.getContour(FaceContourType.allPoints));
       smileProb = f.smilingProbability;
-      
-      print('============================================');
-      print(smileProb);
     }
     loadImage(image).then((img) {
       setState(() {
@@ -52,15 +52,17 @@ class _FaceDetectionState extends State<FaceDetection> {
   }
 
   String detectSmile() {
-    if (smileProb > 0.86) {
-      return 'Big smile with teeth';
-    }
-    else if (smileProb > 0.8) {
-      return 'Big Smile';
-    } else if (smileProb > 0.3) {
-      return 'Smile';
+    if (smileProb != null) {
+      if (smileProb > 0.86) {
+        return 'Big smile with teeth';
+      } else if (smileProb > 0.8) {
+        return 'Big Smile';
+      } else if (smileProb > 0.3) {
+        return 'Smile';
+      } else
+        return 'Sad';
     } else
-      return 'Sad';
+      return '';
   }
 
   @override

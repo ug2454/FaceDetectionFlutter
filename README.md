@@ -1,4 +1,4 @@
-# face_detection_flutter
+# Smile Detection App
 
 A Face detection flutter project made with Firebase ML Kit.
 
